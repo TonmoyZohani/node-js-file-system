@@ -1,4 +1,7 @@
 const { a: x } = require("./file2.js");
 const { a: y } = require("./file3.js");
 
-console.log(x, y);
+const { add } = require("./utils/add.js");
+const { sub } = require("./utils/sub.js");
+
+console.log(add(x, y));
