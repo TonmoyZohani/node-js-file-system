@@ -40,3 +40,16 @@ const fs = require("fs");
 //   fs.unlinkSync("./output/temp.txt");
 //   console.log("file deleted");
 // }
+
+fs.writeFile("./output/temp2.txt", "Aother temp file", (err) => {
+  if (err) return console.error(err.message);
+
+  console.log("Another temp file created");
+  fs.unlink("./output/temp2.txt", (err) => {
+    if (err) {
+      console.error("Error :", err.message);
+    } else {
+      console.log("Temp2 deleted");
+    }
+  });
+});
