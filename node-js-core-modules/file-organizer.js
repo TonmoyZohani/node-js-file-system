@@ -42,26 +42,40 @@ function initializeDirectories() {
     });
   }
 
-  //   if (!fs.existsSync(sourceDir)) {
-  //     fs.mkdirSync(sourceDir, { recursive: true });
+    console.log("Messy directories files are created!!!");
 
-  //     testFiles.forEach((file) => {
-  //       fs.writeFileSync(path.join(sourceDir, file), `Content of ${file}`);
-  //     });
-  //   }
+    if (!fs.existsSync(organizedDir)) {
+      fs.mkdirSync(organizedDir, { recursive: true });
+    }
 
-  //   console.log("Messy directories files are created!!!");
+    Object.keys(categories).forEach((category) => {
+      const categoryPath = path.join(organizedDir, category);
+      if (!fs.existsSync(categoryPath)) {
+        fs.mkdirSync(categoryPath);
+      }
+    });
+}
 
-  //   if (!fs.existsSync(organizedDir)) {
-  //     fs.mkdirSync(organizedDir, { recursive: true });
-  //   }
+// function getCategory(filename) {
+//   const ext = path.extname(filename).toLowerCase(); // ".pdf", ".jpg"
+//   // [images: [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg"]],
+//   for (const [category, extensions] of Object.entries(categories)) {
+//     if (extensions.includes(ext)) {
+//       return category;
+//     }
+//   }
+//   return "others";
+// }
 
-  //   Object.keys(categories).forEach((category) => {
-  //     const categoryPath = path.join(organizedDir, category);
-  //     if (!fs.existsSync(categoryPath)) {
-  //       fs.mkdirSync(categoryPath);
-  //     }
-  //   });
+function getCategory(filename){
+  const ext = path.extname(filename).toLowerCase();
+  for (const [category,extensions] of Object.entries(categories)){
+    if(extensions.includes(ext)){
+      return category;
+    }
+  }
+
+  return "others";
 }
 
 initializeDirectories();
